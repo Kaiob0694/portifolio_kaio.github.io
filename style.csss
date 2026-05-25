@@ -91,11 +91,10 @@ body::before {
 .hero {
   position: relative;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  gap: 3rem;
   padding: 100px clamp(1.5rem, 7vw, 5rem) 5rem;
   overflow: hidden;
 }
@@ -112,30 +111,8 @@ body::before {
   pointer-events: none;
 }
 
-/* second glow left */
-.hero::before {
-  content: '';
-  position: absolute;
-  bottom: 10%;
-  left: -10%;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(79,110,247,.10) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero__text {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 680px;
-}
-
 .hero__greeting {
-  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
   font-family: var(--font-head);
   color: var(--text-mid);
   font-weight: 400;
@@ -144,23 +121,18 @@ body::before {
 
 .hero__name {
   font-family: var(--font-head);
-  font-size: clamp(2.8rem, 8vw, 5.5rem);
-  font-weight: 900;
-  letter-spacing: -.04em;
-  line-height: 1.02;
-  margin-top: .2rem;
+  font-size: clamp(2.2rem, 6vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+  margin-top: .25rem;
   animation: fadeUp .6s .1s ease both;
-  /* subtle gradient on the name */
-  background: linear-gradient(135deg, #fff 30%, #8fa0ff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .hero__socials {
   display: flex;
   gap: .75rem;
-  margin: 1.4rem 0 0;
+  margin: 1.25rem 0;
   animation: fadeUp .6s .2s ease both;
 }
 
@@ -180,69 +152,19 @@ body::before {
   background: rgba(79,110,247,.1);
 }
 
-/* ─── TECH ICONS ROW ─────────────────────────────────────────────────────── */
-.hero__tech-icons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin: 2rem 0;
-  animation: fadeUp .6s .3s ease both;
-  flex-wrap: wrap;
-}
-
-.tech-icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: .45rem;
-  padding: .9rem 1.1rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  color: var(--text-mid);
-  cursor: default;
-  transition: color .25s, border-color .25s, background .25s, transform .2s;
-  min-width: 70px;
-}
-
-.tech-icon:hover {
-  color: var(--text-hi);
-  border-color: rgba(79,110,247,.45);
-  background: rgba(79,110,247,.08);
-  transform: translateY(-3px);
-}
-
-.tech-icon svg {
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-}
-
-.tech-icon span {
-  font-size: .7rem;
-  font-family: var(--font-head);
-  font-weight: 500;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  color: inherit;
-}
-
-/* ─── HERO BIO & CTA ─────────────────────────────────────────────────────── */
 .hero__bio {
   color: var(--text-mid);
-  max-width: 520px;
-  font-size: .92rem;
-  line-height: 1.75;
-  animation: fadeUp .6s .4s ease both;
+  max-width: 440px;
+  font-size: .9rem;
+  line-height: 1.7;
+  animation: fadeUp .6s .3s ease both;
 }
 
 .hero__cta {
   display: flex;
   gap: .9rem;
   margin-top: 1.75rem;
-  animation: fadeUp .6s .5s ease both;
-  justify-content: center;
+  animation: fadeUp .6s .4s ease both;
 }
 
 /* ─── BUTTONS ────────────────────────────────────────────────────────────── */
@@ -274,6 +196,89 @@ body::before {
 }
 .btn--ghost:hover { color: var(--text-hi); border-color: rgba(255,255,255,.2); }
 
+/* ─── HERO CARD ──────────────────────────────────────────────────────────── */
+.hero__visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  animation: fadeUp .6s .15s ease both;
+}
+
+.hero__card {
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  aspect-ratio: 16/9;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero__card-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 30%, rgba(79,110,247,.25) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero__card-content {
+  position: relative;
+  padding: 1.5rem;
+  width: 100%;
+}
+
+.hero__card-label {
+  font-family: var(--font-head);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: .75rem;
+}
+
+.hero__tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem;
+}
+
+.tech-tag {
+  padding: .25rem .7rem;
+  background: rgba(79,110,247,.12);
+  border: 1px solid rgba(79,110,247,.25);
+  border-radius: 999px;
+  font-size: .75rem;
+  color: var(--text-mid);
+}
+
+.hero__dots {
+  display: flex;
+  gap: .5rem;
+}
+
+.dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-lo);
+  font-size: .65rem;
+  transition: border-color .2s, background .2s;
+}
+.dot.active,
+.dot:hover {
+  border-color: var(--accent);
+  background: rgba(79,110,247,.15);
+}
+
 /* ─── DISCOVER ───────────────────────────────────────────────────────────── */
 .discover {
   position: absolute;
@@ -289,7 +294,6 @@ body::before {
   text-decoration: none;
   animation: bounce 2s 1s ease-in-out infinite;
   transition: color .2s;
-  z-index: 1;
 }
 .discover:hover { color: var(--text-mid); }
 
@@ -343,6 +347,7 @@ body::before {
   display: block;
 }
 
+/* subtle shimmer on hover */
 .project-card__img::after {
   content: '';
   position: absolute;
@@ -431,15 +436,19 @@ body::before {
 
 /* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
 @media (max-width: 768px) {
-  .hero__tech-icons { gap: .6rem; }
-  .tech-icon { padding: .75rem .85rem; min-width: 60px; }
-  .tech-icon svg { width: 26px; height: 26px; }
+  .hero {
+    grid-template-columns: 1fr;
+    padding-top: 90px;
+    text-align: center;
+  }
+  .hero__visual { order: -1; }
+  .hero__socials { justify-content: center; }
+  .hero__bio { margin: 0 auto; }
+  .hero__cta { justify-content: center; }
   .projects__grid { grid-template-columns: 1fr; }
   .nav__links { gap: 1.25rem; }
 }
 
 @media (max-width: 480px) {
   .nav__links { display: none; }
-  .hero__tech-icons { gap: .5rem; }
-  .tech-icon { padding: .65rem .7rem; min-width: 54px; }
 }
